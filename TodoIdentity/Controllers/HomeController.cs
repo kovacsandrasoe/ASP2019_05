@@ -27,26 +27,28 @@ namespace TodoIdentity.Controllers
         }
 
 
-        [HttpGet]
-        public async Task<IActionResult> FirstStep()
-        {
-            //1. csinálunk egy admin szerepkört
-            //2. beletesszük az első user-t
+        //[HttpGet]
+        //public async Task<IActionResult> FirstStep()
+        //{
+        //    //1. csinálunk egy admin szerepkört
+        //    //2. beletesszük az első user-t
 
-            IdentityRole adminrole = new IdentityRole()
-            {
-                Name = "admins"
-            };
-            await rolemanager.CreateAsync(adminrole);
+        //    IdentityRole adminrole = new IdentityRole()
+        //    {
+        //        Name = "admins"
+        //    };
+        //    await rolemanager.CreateAsync(adminrole);
 
-            var firstuser = usermanager.Users.FirstOrDefault(); 
+        //    var firstuser = usermanager.Users.FirstOrDefault(); 
 
-            await usermanager.AddToRoleAsync(firstuser, "admins");
+        //    await usermanager.AddToRoleAsync(firstuser, "admins");
 
-            return RedirectToAction("Index");
+        //    return RedirectToAction("Index");
 
-        }
+        //}
+        
 
+        
 
 
         public IActionResult Index()
@@ -54,7 +56,7 @@ namespace TodoIdentity.Controllers
             return View();
         }
 
-        [Authorize]
+        [Authorize(Roles = "admins")]
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";

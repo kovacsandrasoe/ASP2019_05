@@ -56,18 +56,40 @@ namespace TodoIdentity.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult AddJob(string name)
+        {
+            //kik vagyunk mi?
+            var myself = this.User;
+            string user = usermanager.GetUserId(myself);
+
+            Job j = new Job()
+            {
+                Name = name,
+                Owner = user
+            };
+            database.Jobs.Add(j);
+            database.SaveChanges();
+            return RedirectToAction(nameof(Dashboard));
+        }
+
         [Authorize(Roles = "admins")]
         public IActionResult Admin()
         {
-
-            return View();
+            return View(database.Jobs);
         }
 
         [Authorize]
         public IActionResult Dashboard()
         {
+            //kik vagyunk mi?
+            var myself = this.User;
+            string user = usermanager.GetUserId(myself);
 
-            return View();
+            var ownjobs = database.Jobs.
+                Where(u => u.Owner == user);
+
+            return View(ownjobs);
         }
 
         public IActionResult Privacy()

@@ -4,7 +4,7 @@
     @foreach (var item in Model)
     {
         <li>
-            @item.Name + "[" + @item.Owner + "]"
+            @item.Name &nbsp;&nbsp;&nbsp; @item.Owner
             <ul>
                 @foreach (var todo in item.Todos)
                 {

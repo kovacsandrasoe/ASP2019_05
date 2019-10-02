@@ -1,17 +1,32 @@
 ﻿@model IEnumerable<Job>
 
-<form method="post" action="/Home/AddTodo">
+<form method="post" action="/Home/AddJob">
     Name: <input type="text" name="Name" />
-    <input type="submit" value="ADD" />
+    <input type="submit" value="ADD JOB" />
 </form>
 
-<hr/>
+<hr />
+
+<form method="post" action="/Home/AddTodo">
+    Name: <input type="text" name="Name" /> <br />
+    Job:
+    <select name="jobid">
+        @foreach (var item in Model)
+        {
+            <option value="@item.Id">@item.Name</option>
+        }
+    </select>
+
+    <input type="submit" value="ADD TODO" />
+</form>
+
+<hr />
 
 <ul>
     @foreach (var item in Model)
     {
         <li>
-            @item.Name + "[" + @item.Owner + "]"
+            @item.Name &nbsp;&nbsp;&nbsp; @item.Owner
             <ul>
                 @foreach (var todo in item.Todos)
                 {

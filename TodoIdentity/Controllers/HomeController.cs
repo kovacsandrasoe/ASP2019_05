@@ -26,6 +26,29 @@ namespace TodoIdentity.Controllers
             this.database = database;
         }
 
+
+        [HttpGet]
+        public async Task<IActionResult> FirstStep()
+        {
+            //1. csinálunk egy admin szerepkört
+            //2. beletesszük az első user-t
+
+            IdentityRole adminrole = new IdentityRole()
+            {
+                Name = "admins"
+            };
+            await rolemanager.CreateAsync(adminrole);
+
+            var firstuser = usermanager.Users.FirstOrDefault(); 
+
+            await usermanager.AddToRoleAsync(firstuser, "admins"); 
+
+
+
+        }
+
+
+
         public IActionResult Index()
         {
             return View();

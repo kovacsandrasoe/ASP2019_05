@@ -41,6 +41,8 @@ namespace TodoIdentity
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
+
             services.AddIdentity<IdentityUser, IdentityRole>(t =>
             {
                 t.Password.RequireDigit = false; //ne legyen szám

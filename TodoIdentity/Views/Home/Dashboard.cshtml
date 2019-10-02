@@ -1,17 +1,24 @@
-﻿@{
-    ViewData["Title"] = "Contact";
-}
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
+﻿@model IEnumerable<Job>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<form method="post" action="/Home/AddTodo">
+    Name: <input type="text" name="Name" />
+    <input type="submit" value="ADD" />
+</form>
 
-<address>
-    <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<hr/>
+
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>
+            @item.Name + "[" + @item.Owner + "]"
+            <ul>
+                @foreach (var todo in item.Todos)
+                {
+                    <li>@todo.Name</li>
+                }
+            </ul>
+        </li>
+    }
+</ul>
+

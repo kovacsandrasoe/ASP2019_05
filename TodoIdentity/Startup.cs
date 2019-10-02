@@ -23,7 +23,7 @@ namespace TodoIdentity
 
 
 
-             
+
         }
 
         public IConfiguration Configuration { get; }
@@ -39,8 +39,12 @@ namespace TodoIdentity
             });
 
             services.AddDbContext<ApplicationDbContext>(options =>
+            {
+                options.UseLazyLoadingProxies();
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                        Configuration.GetConnectionString("DefaultConnection"));
+            });
+
 
 
             services.AddIdentity<IdentityUser, IdentityRole>(t =>

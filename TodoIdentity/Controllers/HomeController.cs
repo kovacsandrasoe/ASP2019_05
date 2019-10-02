@@ -57,6 +57,27 @@ namespace TodoIdentity.Controllers
         }
 
         [HttpPost]
+        public IActionResult AddTodo(string name, string jobid)
+        {
+            //kik vagyunk mi?
+            var myself = this.User;
+            string user = usermanager.GetUserId(myself);
+
+            var job = database.Jobs.FirstOrDefault(
+                t => t.Id == int.Parse(jobid));
+            job.Todos.Add(new Todo()
+            {
+                Name = name,
+                CreationDate = DateTime.Now
+            });
+
+            database.SaveChanges();
+            return RedirectToAction(nameof(Dashboard));
+        }
+
+
+
+        [HttpPost]
         public IActionResult AddJob(string name)
         {
             //kik vagyunk mi?

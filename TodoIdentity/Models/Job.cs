@@ -19,12 +19,6 @@ namespace TodoIdentity.Models
 
         public virtual ICollection<Todo> Todos { get; set; }
 
-        public Job()
-        {
-            if (Todos == null)
-            {
-                Todos = new List<Todo>();
-            }
-        }
+        
     }
 }

@@ -1,7 +1,16 @@
-﻿@{
-    ViewData["Title"] = "About";
-}
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
+﻿@model IEnumerable<Job>
 
-<p>Use this area to provide additional information.</p>
+    <ul>
+    @foreach (var item in Model)
+    {
+        <li>
+            @item.Name + "[" + @item.Owner + "]"
+            <ul>
+                @foreach (var todo in item.Todos)
+                {
+                    <li>@todo.Name</li>
+                }
+            </ul>
+        </li>
+    }
+    </ul>

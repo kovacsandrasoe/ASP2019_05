@@ -57,16 +57,15 @@ namespace TodoIdentity.Controllers
         }
 
         [Authorize(Roles = "admins")]
-        public IActionResult About()
+        public IActionResult Admin()
         {
-            ViewData["Message"] = "Your application description page.";
 
             return View();
         }
 
-        public IActionResult Contact()
+        [Authorize]
+        public IActionResult Dashboard()
         {
-            ViewData["Message"] = "Your contact page.";
 
             return View();
         }

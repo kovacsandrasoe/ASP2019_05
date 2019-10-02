@@ -41,9 +41,9 @@ namespace TodoIdentity.Controllers
 
             var firstuser = usermanager.Users.FirstOrDefault(); 
 
-            await usermanager.AddToRoleAsync(firstuser, "admins"); 
+            await usermanager.AddToRoleAsync(firstuser, "admins");
 
-
+            return RedirectToAction("Index");
 
         }
 
